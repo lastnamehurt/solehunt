@@ -1,0 +1,4 @@
+
+
+class SoleHuntServiceError:
+    raise NotImplementedError
