@@ -34,7 +34,7 @@ urlpatterns = [
     path('home', home_view, name="home"),
     path('signup/', signup_view, name="signup"),
     path('sent/', activation_sent_view, name="activation_sent"),
-    path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
+    path('activate/<slug:uidb64>/<slug:token>/', activate, name="activate"),
     # imported urls
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('custom_api/', include('subscribers.urls')),
