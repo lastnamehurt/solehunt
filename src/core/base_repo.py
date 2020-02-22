@@ -12,7 +12,7 @@ class BaseRepo:
     def getById(self, modelId):
         return self.repo.objects.get(id=modelId)
 
-    def getByFilter(self,   **kwargs):
+    def getByFilter(self, **kwargs):
         return self.repo.objects.filter(**kwargs)
 
     def create(self, **kwargs):
