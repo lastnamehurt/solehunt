@@ -133,3 +133,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# API Keys
+GHOST_CONTENT_API_KEY = os.environ.get("GHOST_CONTENT_API_KEY", None)
