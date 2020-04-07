@@ -23,7 +23,7 @@ class SubscriberRepoTest(TestCase):
         self.assertTrue(self.obj1.alias == 'testGetById')
 
     def testDelete(self):
-        obj = self.repo.delete(1)
+        obj = self.repo.deleteById(1)
         self.assertNotIsInstance(obj, Subscriber)
 
     def testGetByFilter(self):

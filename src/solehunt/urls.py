@@ -4,9 +4,8 @@ from django.contrib.auth.models import User
 from django.urls import include, path
 from rest_framework import routers, serializers, viewsets
 
-from accounts.views import activate, activation_sent_view, home_view, signup_view
-
-
+from accounts.views import (activate, activation_sent_view, home_view,
+                            signup_view)
 # Serializers define the API representation.
 from subscribers.views import SubscriberViewSet
 
