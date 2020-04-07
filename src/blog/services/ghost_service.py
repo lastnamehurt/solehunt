@@ -1,13 +1,12 @@
 import json
+from typing import Any, Callable
+
 import requests
 
-from solehunt.settings import GHOST_CONTENT_API_KEY
-from solehunt.settings import BLOG_DOMAIN
-from solehunt.settings import VERSION
+from solehunt.settings import BLOG_DOMAIN, GHOST_CONTENT_API_KEY, VERSION
 
+RESOURCE_URL: Callable[[Any], str] = lambda target: f'https://{BLOG_DOMAIN}/ghost/api/{VERSION}/content/{target}/?key={GHOST_CONTENT_API_KEY}'
 
-RESOURCE_URL = lambda target: 'https://{0}/ghost/api/{1}/content/{2}/?key={3}'.format(BLOG_DOMAIN, VERSION, target,
-                                                                                      GHOST_CONTENT_API_KEY)
 
 class GHOST_ENDPOINTS:
     ALL_POSTS = RESOURCE_URL('posts')
@@ -31,7 +30,7 @@ class GhostAPIWrapper(object):
     def getAllPosts(cls):
         res = requests.get(GHOST_ENDPOINTS.ALL_POSTS)
         return json.loads(res.content)
-    
+
     @classmethod
     def getPostById(cls, postId):
         res = requests.get(GHOST_ENDPOINTS.POST_BY_ID.format(postId))

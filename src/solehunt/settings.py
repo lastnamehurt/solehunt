@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'subscribers',
     'accounts',
     'core',
-    'blog'
+    'blog',
+    'sneaker_rack'
 ]
 
 MIDDLEWARE = [
