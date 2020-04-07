@@ -36,11 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'crispy_forms',
+    # 'crispy_forms',
     'django_extensions',
     'subscribers',
     'accounts',
-    'core'
+    'core',
+    'blog',
+    'sneaker_rack'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# API Keys
+GHOST_CONTENT_API_KEY = os.environ.get("GHOST_CONTENT_API_KEY", None)
+
+# CONSTANTS
+BLOG_DOMAIN = 'blog.solehunt.com'
+VERSION = 'v3'

@@ -48,7 +48,7 @@ class SubscriberViewTest(APITestCase):
         # clean subscribers
         Subscriber.objects.all().delete()
         newSubscriberData = self.client.post('/api/subscribers/', {'alias': 'test'})
-        newSubscriber = subscriberService.repo.getById(newSubscriberData.data['id'])
+        newSubscriber = subscriberService.getSubscriberById(newSubscriberData.data['id'])
 
         self.assertIsInstance(newSubscriber, Subscriber)
         self.assertTrue(newSubscriber.alias == 'test')

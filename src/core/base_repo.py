@@ -9,17 +9,58 @@ class BaseRepo:
         if not self.repo:
             raise ValueError("Repo Required")
 
+    def query(self):
+        return self.repo.objects
+
+    def fetchAll(self):
+        return self.query().all()
+
+    def count(self, **kwargs):
+        return self.query().filter(**kwargs).count()
+
     def getById(self, modelId):
-        return self.repo.objects.get(id=modelId)
+        return self.query().get(id=modelId)
 
     def getByFilter(self, **kwargs):
-        return self.repo.objects.filter(**kwargs)
+        """
+        essentially the same as query()
+        """
+        return self.query().filter(**kwargs)
 
     def create(self, **kwargs):
-        return self.repo.objects.create(**kwargs)
+        return self.query().create(**kwargs)
 
-    def delete(self, modelId):
-        return self.repo.objects.get(id=modelId).delete()
+    def prepareModel(self, **kwargs):
+        return self.repo(**kwargs)
+
+    def exists(self, **kwargs):
+        return self.query().filter(**kwargs).exists()
+
+    def deleteById(self, modelId):
+        return self.query().get(id=modelId).delete()
 
     def update(self, modelId, **kwargs):
-        return self.repo.objects.filter(id=modelId).update(**kwargs)
+        return self.query().filter(id=modelId).update(**kwargs)
+
+    def createOrUpdate(self, **kwargs):
+        return self.update(kwargs.get('id'), **kwargs) if self.exists(id=kwargs.get('id', None)) else self.create(
+            **kwargs)
+
+# def _query(self, fields=None):
+#     djangoFields = [
+#         self._m
+#     ]
+
+# class ModelRepoMetaClass(type):
+#     def __new__(cls, name, bases, attrs, *args, **kwargs):
+#         super_new = super(ModelRepoMetaClass, cls).__new__
+#
+#         parents = [b for b in bases if isinstance(b, ModelRepoMetaClass)]
+#         if not parents:
+#             return super_new(cls, name, bases, attrs, *args, **kwargs)
+#
+#         meta = attrs.pop('Meta', None)
+#         new_class = super_new(cls, name, bases, attrs, *args, **kwargs)
+#         new_class._meta = meta
+#
+#         return new_class
