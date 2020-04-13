@@ -34,8 +34,8 @@ class SubscriberService(object):
         return subscriberRepo.fetchAll()
 
     @staticmethod
-    def createNewSubscriber(**kwargs):
-        subscriber = subscriberRepo.create(**kwargs)
+    def createNewSubscriber(filters):
+        subscriber = subscriberRepo.create(**filters)
         if not subscriber.alias:
             raise ValueError("Email Required")
         return subscriber
