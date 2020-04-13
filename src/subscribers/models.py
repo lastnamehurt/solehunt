@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 from accounts.models import Profile
 from sneaker_rack.models import Sneaker
@@ -13,8 +11,9 @@ class Subscriber(models.Model):
     """
     id = models.AutoField(primary_key=True)
     alias = models.CharField(max_length=100)
-    isActive = models.BooleanField(default=False)
     profile = models.ForeignKey("accounts.Profile", related_name='profile', null=True, on_delete=models.CASCADE)
+    isActive = models.BooleanField(default=False)
+    isContributor = models.BooleanField(default=False) # TODO: churt configure rules - maybe data-fix
 
     @property
     def sneakers(self):
@@ -27,6 +26,7 @@ class Subscriber(models.Model):
         permissions = [
             (
                 "can_view_sneakers", "Can View Sneakers"
+                # "is_contributor", "Is Contributor"
             )
         ]
 

@@ -10,7 +10,7 @@ class GhostApiMapper:
         postsData = apiResponses['posts']
         for postData in postsData:
             data = cls.parseBlogPost(postData)
-            newBlogs.append(blogService.prepare(**data))
+            newBlogs.append(blogService.prepare(filters=data))
         return newBlogs
 
     @classmethod
