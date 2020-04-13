@@ -1,0 +1,3 @@
+import os
+
+GHOST_CONTENT_API_KEY = os.environ.get("GHOST_CONTENT_API_KEY", '2a4c46adff7aa205279397a289')

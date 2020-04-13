@@ -49,8 +49,8 @@ class BlogService(object):
         return blogRepo.query().filter(**kwargs)
 
     @classmethod
-    def prepare(cls, **kwargs):
-        return blogRepo.prepareModel(**kwargs)
+    def prepare(cls, filters):
+        return blogRepo.prepareModel(**filters)
 
 
 blogService = BlogService()

@@ -3,16 +3,22 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from accounts.models import Profile
+from sneaker_rack.models import Sneaker
 
 
 class Subscriber(models.Model):
     """
-    Every Profile is a Subscriber
+    every Subscriber maps to Profile
+    once a subscription is created
     """
     id = models.AutoField(primary_key=True)
     alias = models.CharField(max_length=100)
     isActive = models.BooleanField(default=False)
-    account = models.ForeignKey(Profile, related_name='+', null=True, on_delete=models.CASCADE, db_column="profile")
+    profile = models.ForeignKey("accounts.Profile", related_name='profile', null=True, on_delete=models.CASCADE)
+
+    @property
+    def sneakers(self):
+        return Sneaker.objects.filter(owner_id=self.id)
 
     class Meta:
         db_table = 'subscriber'

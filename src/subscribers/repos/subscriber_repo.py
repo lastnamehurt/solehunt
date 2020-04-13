@@ -1,4 +1,4 @@
-from core.base_repo import BaseRepo
+from core.core_repo import BaseRepo
 from subscribers.models import Subscriber
 
 
