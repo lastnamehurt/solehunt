@@ -31,7 +31,7 @@ def activate(request, uidb64, token):
         # if valid set active true
         user.is_active = True
         # set signup_confirmation true
-        user.profile.signup_confirmation = True
+        user.profile.signupConfirmation = True
         user.save()
         login(request, user)
         return redirect('home')

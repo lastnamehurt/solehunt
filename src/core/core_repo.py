@@ -12,14 +12,17 @@ class BaseRepo:
     def query(self):
         return self.repo.objects
 
+    def _get(self, modelId):
+        self.query().get(id=modelId)
+
     def fetchAll(self):
         return self.query().all()
 
     def count(self, **kwargs):
         return self.query().filter(**kwargs).count()
 
-    def getById(self, modelId):
-        return self.query().get(id=modelId)
+    def getById(self, modelId: int) -> object:
+        return self._get(modelId)
 
     def getByFilter(self, **kwargs):
         """
