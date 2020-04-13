@@ -59,8 +59,13 @@ class ProfileServiceTest(TestCase):
         self.assertEqual(updatedProfile.last_name, 'User')
         self.assertEqual(updatedProfile.id, oldProfile.id)
 
+    @unittest.skip
     def testSubscribeToSoleHunt(self):
         """
         RULE: Subscriber must follow instagram and twitter
         """
+        pass
+
+    @unittest.skip
+    def testUnsubscribe(self):
         pass
