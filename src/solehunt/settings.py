@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'core',
     'blog',
-    'sneaker_rack'
+    'sneaker_rack',
+    'posts',
 
 ]
 
