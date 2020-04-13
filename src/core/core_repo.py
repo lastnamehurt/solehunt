@@ -30,8 +30,8 @@ class BaseRepo:
         """
         return self.query().filter(**kwargs)
 
-    def create(self, **kwargs):
-        return self.query().create(**kwargs)
+    def create(self, filters):
+        return self.query().create(**filters)
 
     def prepareModel(self, **kwargs):
         return self.repo(**kwargs)
