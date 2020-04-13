@@ -16,6 +16,9 @@ NEW_PROFILE = {
 
 
 class ProfileServiceTest(TestCase):
+    """
+    API Tests
+    """
 
     def setUp(self):
         self.newProfile = profileService.createNewProfileInstance(filters=NEW_PROFILE)
@@ -55,3 +58,14 @@ class ProfileServiceTest(TestCase):
         self.assertEqual(updatedProfile.first_name, 'Admin')
         self.assertEqual(updatedProfile.last_name, 'User')
         self.assertEqual(updatedProfile.id, oldProfile.id)
+
+    @unittest.skip
+    def testSubscribeToSoleHunt(self):
+        """
+        RULE: Subscriber must follow instagram and twitter
+        """
+        pass
+
+    @unittest.skip
+    def testUnsubscribe(self):
+        pass
