@@ -2,7 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-# from subscribers.models import Subscriber
 
 
 class Sneaker(models.Model):

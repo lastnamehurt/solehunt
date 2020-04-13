@@ -7,7 +7,7 @@ from subscribers.models import Subscriber
 class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscriber
-        fields = ('id', 'alias', 'isActive', 'account')
+        fields = ('id', 'alias', 'isActive')
 
 
 class UserSerializer(serializers.ModelSerializer):

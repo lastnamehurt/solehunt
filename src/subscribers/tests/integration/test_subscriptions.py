@@ -20,3 +20,15 @@ class SubscriptionTest(TestCase):
 
     def testInvalidSubscription(self):
         pass
+
+    def testViewBlogs(self):
+        """
+        A blog is a post from Ghost, written by a contributor
+        """
+        pass
+
+    def testViewPosts(self):
+        """
+        A post is an internal post from Subscribers
+        """
+        pass
