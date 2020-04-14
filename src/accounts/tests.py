@@ -62,7 +62,7 @@ class ProfileServiceTest(TestCase):
     @unittest.skip
     def testSubscribeToSoleHunt(self):
         """
-        RULE: Subscriber must follow instagram and twitter
+        RULE: Subscriber must follow instagram or twitter
         """
         pass
 
