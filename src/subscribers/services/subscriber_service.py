@@ -1,7 +1,11 @@
+from core.core_service import SoleHuntBaseService
 from subscribers.repos import subscriberRepo
 
 
-class SubscriberService(object):
+# TODO: churt refactor this service to inherit SoleHuntBaseService
+class SubscriberService(SoleHuntBaseService):
+
+    repo = subscriberRepo.repo
 
     @staticmethod
     def deleteSubscriberById(subscriberId):
@@ -35,7 +39,7 @@ class SubscriberService(object):
 
     @staticmethod
     def createNewSubscriber(filters):
-        subscriber = subscriberRepo.create(**filters)
+        subscriber = subscriberRepo.create(filters)
         if not subscriber.alias:
             raise ValueError("Email Required")
         return subscriber

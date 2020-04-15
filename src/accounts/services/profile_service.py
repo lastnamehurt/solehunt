@@ -1,45 +1,30 @@
-import logging
-
-from accounts.models import Profile
 from accounts.repos.profile_repo import profileRepo
+from core.core_service import SoleHuntBaseService
 
 
-class ProfileService(object):
+class ProfileService(SoleHuntBaseService):
 
     repo = profileRepo
 
     @classmethod
-    def get(cls, profileId):
-        instance = cls.repo.getById(profileId)
-        return instance
-
-    @classmethod
     def getAllProfiles(cls):
-        return cls.repo.fetchAll()
-
-    @classmethod
-    def createNewProfileInstance(cls, filters):
-        instance = cls.repo.prepareModel(**filters)
-        return instance
-
-    @classmethod
-    def deleteProfile(cls, profileId):
-        cls.repo.deleteById(profileId)
-
-    @classmethod
-    def updateProfile(cls, profileId, filters):
-        cls.repo.update(profileId, **filters)
+        return cls.getAllObjects()
 
     @classmethod
     def getOrCreateProfile(cls, filters):
-        profileId = filters.get('id', None)
-        try:
-            instance = cls.repo.getById(profileId)
-            return instance
-        except Profile.DoesNotExist:
-            logging.info('Profile with ID {} does not exist'.format(profileId))
-            newInstance = cls.repo.create(**filters)
-            return newInstance
+        cls.getOrCreate(filters)
+
+    @classmethod
+    def createNewProfileInstance(cls, filters):
+        return cls.prepare(filters)
+
+    @classmethod
+    def deleteProfile(cls, profileId):
+        cls.delete(profileId)
+
+    @classmethod
+    def updateProfile(cls, profileId, filters):
+        cls.update(profileId, filters)
 
 
 profileService = ProfileService()

@@ -31,7 +31,7 @@ class ProfileServiceTest(TestCase):
         user = profileSeeder.seedUser()
         PROFILE_WITH_USER = NEW_PROFILE.copy()
         PROFILE_WITH_USER['user'] = user
-        self.updatedProfile = profileService.getOrCreateProfile(filters=PROFILE_WITH_USER)
+        self.updatedProfile = profileService.createNewProfileInstance(filters=PROFILE_WITH_USER)
 
         self.assertIsInstance(self.updatedProfile, Profile)
         self.assertEqual(user.id, self.updatedProfile.user.id)

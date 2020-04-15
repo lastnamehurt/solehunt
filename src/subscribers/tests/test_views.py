@@ -10,7 +10,7 @@ class SubscriberViewTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.client = APIClient()
-        cls.newSubscriber = subscriberService.createNewSubscriber(alias='NewGuy')
+        cls.newSubscriber = subscriberService.createNewSubscriber(filters={'alias': 'NewGuy'})
         cls.res = cls.client.get('/api/subscribers/', follow=True)
 
     def testGetAllSubscribers(self):
@@ -19,7 +19,7 @@ class SubscriberViewTest(APITestCase):
         self.assertEqual(subscriberId, 1)
 
     def testGetSubscriberById(self):
-        subscriber = subscriberService.createNewSubscriber(alias='NewGuy')
+        subscriber = subscriberService.createNewSubscriber(filters={'alias': 'NewGuy'})
         res = self.client.get('/api/subscribers/1', follow=True)
 
         self.assertEqual(res.status_code, 200)

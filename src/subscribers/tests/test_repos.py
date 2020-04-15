@@ -3,14 +3,18 @@ from django.test import TestCase
 from subscribers.models import Subscriber
 from subscribers.repos.subscriber_repo import SubscriberRepo
 
+first = {'alias': 'test', 'isActive': True}
+second = {'alias': 'testGetById'}
+third = {'alias': 'testGetByFilter'}
+
 
 class SubscriberRepoTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.repo = SubscriberRepo()
-        cls.obj = cls.repo.create(alias='test', isActive=True)
-        cls.obj1 = cls.repo.create(alias='testGetById')
-        cls.obj2 = cls.repo.create(alias='testGetByFilter')
+        cls.obj = cls.repo.create(first)
+        cls.obj1 = cls.repo.create(second)
+        cls.obj2 = cls.repo.create(third)
 
     def test_create(self):
         self.assertIsInstance(self.obj, Subscriber)
