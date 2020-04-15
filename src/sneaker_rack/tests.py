@@ -13,6 +13,12 @@ class SneakerTest(TestCase):
     def testUpdateSneaker(self):
         pass
 
+    def testAddToRack(self):
+        pass
+
+    def testRemoveFromRack(self):
+        pass
+
 
 class SneakerRackTest(TestCase):
 
@@ -28,5 +34,7 @@ class SneakerRackTest(TestCase):
     def testUpdateSneakerRack(self):
         pass
 
+    def testRefreshRack(self):
+        pass
     def testGetAllSneakersInRack(self):
         pass
