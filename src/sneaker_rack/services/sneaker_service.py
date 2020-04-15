@@ -26,3 +26,7 @@ class SneakerRackService(SoleHuntBaseService):
 
     def refreshRack(self):
         pass
+
+
+sneakerService = SneakerService()
+rackService = SneakerRackService()

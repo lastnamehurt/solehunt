@@ -13,7 +13,7 @@ class BaseRepo:
         return self.repo.objects
 
     def _get(self, modelId):
-        self.query().get(id=modelId)
+        return self.query().get(id=modelId)
 
     def fetchAll(self):
         return self.query().all()
@@ -21,7 +21,7 @@ class BaseRepo:
     def count(self, **kwargs):
         return self.query().filter(**kwargs).count()
 
-    def getById(self, modelId: int) -> object:
+    def getById(self, modelId):
         return self._get(modelId)
 
     def getByFilter(self, **kwargs):
@@ -43,11 +43,15 @@ class BaseRepo:
         return self.query().get(id=modelId).delete()
 
     def update(self, modelId, **kwargs):
-        return self.query().filter(id=modelId).update(**kwargs)
+        self.query().filter(id=modelId).update(**kwargs)
+        self.save(modelId=modelId)
 
     def createOrUpdate(self, **kwargs):
         return self.update(kwargs.get('id'), **kwargs) if self.exists(id=kwargs.get('id', None)) else self.create(
             **kwargs)
+
+    def save(self, modelId):
+        return self.query().get(id=modelId).save()
 
 # def _query(self, fields=None):
 #     djangoFields = [
