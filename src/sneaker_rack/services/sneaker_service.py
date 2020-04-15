@@ -6,14 +6,12 @@ class SneakerService(SoleHuntBaseService):
 
     repo = sneakerRepo
 
-    def addToFavorites(self):
+    def addToRack(self):
         pass
 
-    def removeFromFavorites(self):
+    def removeFromRack(self):
         pass
 
-    def refreshFavorites(self):
-        pass
 
 
 class SneakerRackService(SoleHuntBaseService):
@@ -24,4 +22,7 @@ class SneakerRackService(SoleHuntBaseService):
         pass
 
     def deleteFavoriteSneakersList(self):
+        pass
+
+    def refreshRack(self):
         pass
