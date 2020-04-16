@@ -3,19 +3,19 @@ from core.usecase import BaseUseCase
 
 
 class CreateProfileUseCase(BaseUseCase):
-    serviceMethod = profileService.create
+    serviceMethod = profileService.createNewProfileInstance
 
 
 class UpdateProfileUseCase(BaseUseCase):
     serviceMethod = profileService.updateProfile
 
 
-class GetProfileUseCase(BaseUseCase):
-    serviceMethod = profileService.get
+class GetProfilesUseCase(BaseUseCase):
+    serviceMethod = profileService.getAllProfiles
 
 
 class DeleteProfileUseCase(BaseUseCase):
-    serviceMethod = profileService.delete
+    serviceMethod = profileService.deleteProfile
 
 
 class DeactivateRegistrationUseCase(BaseUseCase):

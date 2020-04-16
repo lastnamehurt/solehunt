@@ -1,7 +1,10 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from accounts.services import profileService
+from accounts.usecase import CreateProfileUseCase
+from accounts.usecase import DeleteProfileUseCase
+from accounts.usecase import GetProfilesUseCase
+from accounts.usecase import UpdateProfileUseCase
 from core.usecase import UseCaseManager
 from utils.helpers import copyAndUpdateDict
 
@@ -18,18 +21,23 @@ class FILTERS:
 
 class ProfileUseCaseTest(TestCase):
 
-    @patch('core.core_service.SoleHuntBaseService.create')
-    def testCreate(self, mockCreate):
-        UseCaseManager(serviceMethod=profileService.create, filters=FILTERS.CREATE_PROFILE).execute()
-        mockCreate.assert_called_once()
+    @patch('core.core_service.SoleHuntBaseService.prepare')
+    def testCreate(self, mockPrepare):
+        UseCaseManager(CreateProfileUseCase, filters=FILTERS.CREATE_PROFILE).execute()
+        mockPrepare.assert_called_once()
 
     @patch('core.core_service.SoleHuntBaseService.update')
     def testUpdate(self, mockUpdate):
-        UseCaseManager(serviceMethod=profileService.update, filters=FILTERS.UPDATE_PROFILE).execute()
+        UseCaseManager(UpdateProfileUseCase, filters=FILTERS.UPDATE_PROFILE, modelId=1).execute()
         mockUpdate.assert_called_once()
 
-    def testDelete(self):
-        pass
+    @patch('core.core_service.SoleHuntBaseService.delete')
+    def testDelete(self, mockDelete):
+        UseCaseManager(DeleteProfileUseCase, modelId=1).execute()
+        mockDelete.assert_called_once()
+        mockDelete.assert_called_once_with(1)
 
-    def testGet(self):
-        pass
+    @patch('core.core_service.SoleHuntBaseService.getAllObjects')
+    def testGetProfiles(self, mockGetAllObjects):
+        UseCaseManager(GetProfilesUseCase).execute()
+        mockGetAllObjects.assert_called_once()
