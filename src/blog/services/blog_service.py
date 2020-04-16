@@ -4,7 +4,7 @@ from blog.repos.solehunt_blog_repo import blogRepo
 
 class BlogService(SoleHuntBaseService):
 
-    repo = blogRepo.repo
+    repo = blogRepo.model
 
     @classmethod
     def getPostById(cls, postId):

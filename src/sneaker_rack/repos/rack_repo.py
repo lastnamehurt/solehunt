@@ -9,11 +9,11 @@ THE END
 
 
 class SneakerRepo(BaseRepo):
-    repo = Sneaker
+    model = Sneaker
 
 
 class SneakerRackRepo(BaseRepo):
-    repo = SneakerRack
+    model = SneakerRack
 
 
 sneakerRepo = SneakerRepo()

@@ -3,7 +3,7 @@ from core.core_repo import BaseRepo
 
 
 class ProfileRepo(BaseRepo):
-    repo = Profile
+    model = Profile
 
 
 profileRepo = ProfileRepo()

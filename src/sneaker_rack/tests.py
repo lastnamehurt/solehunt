@@ -17,7 +17,7 @@ class SneakerTest(TestCase):
         self.sneaker = sneakerSeeder.seedSneaker()
 
     def testCreateSneaker(self):
-        self.assertIsInstance(self.sneaker, sneakerService.repo.repo)
+        self.assertIsInstance(self.sneaker, sneakerService.repo.model)
         self.assertEqual('Nike', self.sneaker.brand)
         self.assertEqual('Black', self.sneaker.color)
         self.assertEqual('10', self.sneaker.size)
@@ -71,7 +71,7 @@ class SneakerRackTest(TestCase):
         self.SUBSCRIBER_ID = 1
 
     def testCreateSneakerRack(self):
-        self.assertIsInstance(self.rack, rackService.repo.repo)
+        self.assertIsInstance(self.rack, rackService.repo.model)
         self.assertEqual(self.rack.subscriber, subscriberService.getSubscriberById(self.SUBSCRIBER_ID))
 
     @patch('core.core_service.SoleHuntBaseService.getByFilters')

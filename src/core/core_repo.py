@@ -1,60 +1,69 @@
 
 
-class BaseRepo:
+class BaseRepo(object):
     __metaclass__ = None
 
-    repo = __metaclass__
+    model = __metaclass__
 
-    def __init__(self):
-        if not self.repo:
-            raise ValueError("Repo Required")
+    @classmethod
+    def query(cls):
+        return cls.model.objects
 
-    def query(self):
-        return self.repo.objects
+    @classmethod
+    def _get(cls, modelId):
+        return cls.query().get(id=modelId)
 
-    def _get(self, modelId):
-        return self.query().get(id=modelId)
+    @classmethod
+    def fetchAll(cls):
+        return cls.query().all()
 
-    def fetchAll(self):
-        return self.query().all()
+    @classmethod
+    def count(cls, **kwargs):
+        return cls.query().filter(**kwargs).count()
 
-    def count(self, **kwargs):
-        return self.query().filter(**kwargs).count()
+    @classmethod
+    def getById(cls, modelId):
+        return cls._get(modelId)
 
-    def getById(self, modelId):
-        return self._get(modelId)
-
-    def getByFilter(self, **kwargs):
+    @classmethod
+    def getByFilter(cls, **kwargs):
         """
         essentially the same as query()
         """
-        return self.query().filter(**kwargs)
+        return cls.query().filter(**kwargs)
 
-    def create(self, filters):
-        return self.query().create(**filters)
+    @classmethod
+    def create(cls, filters):
+        return cls.query().create(**filters)
 
-    def prepareModel(self, **kwargs):
-        return self.repo(**kwargs)
+    @classmethod
+    def prepareModel(cls, **kwargs):
+        return cls.model(**kwargs)
 
-    def exists(self, **kwargs):
-        return self.query().filter(**kwargs).exists()
+    @classmethod
+    def exists(cls, **kwargs):
+        return cls.query().filter(**kwargs).exists()
 
-    def deleteById(self, modelId):
-        return self.query().get(id=modelId).delete()
+    @classmethod
+    def deleteById(cls, modelId):
+        return cls.query().get(id=modelId).delete()
 
-    def update(self, modelId, **kwargs):
-        self.query().filter(id=modelId).update(**kwargs)
+    @classmethod
+    def update(cls, modelId, **kwargs):
+        cls.query().filter(id=modelId).update(**kwargs)
 
-    def createOrUpdate(self, **kwargs):
-        return self.update(kwargs.get('id'), **kwargs) if self.exists(id=kwargs.get('id', None)) else self.create(
+    @classmethod
+    def createOrUpdate(cls, **kwargs):
+        return cls.update(kwargs.get('id'), **kwargs) if cls.exists(id=kwargs.get('id', None)) else cls.create(
             **kwargs)
 
-    def save(self, modelId):
-        return self.query().get(id=modelId).save()
+    @classmethod
+    def save(cls, modelId):
+        return cls.query().get(id=modelId).save()
 
-# def _query(self, fields=None):
+# def _query(cls, fields=None):
 #     djangoFields = [
-#         self._m
+#         cls._m
 #     ]
 
 # class ModelRepoMetaClass(type):

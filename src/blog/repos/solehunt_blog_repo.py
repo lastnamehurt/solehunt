@@ -4,7 +4,7 @@ from blog.models import BlogPost
 
 class SBlogRepo(BaseRepo):
 
-    repo = BlogPost
+    model = BlogPost
 
 
 blogRepo = SBlogRepo()
