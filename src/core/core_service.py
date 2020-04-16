@@ -13,6 +13,14 @@ class SoleHuntBaseService(object):
     def getAllObjects(cls):
         return cls.repo.fetchAll()
 
+    @classmethod
+    def create(cls, filters):
+        return cls.repo.create(filters)
+
+    @classmethod
+    def getByFilters(cls, filters):
+        return cls.repo.query().filter(**filters)
+
     # noinspection PyBroadException
     @classmethod
     def getOrCreate(cls, filters):
@@ -33,6 +41,7 @@ class SoleHuntBaseService(object):
     @classmethod
     def update(cls, modelId, filters):
         cls.repo.update(modelId, **filters)
+        # cls.repo.save(modelId=modelId)
 
     @classmethod
     def delete(cls, modelId):
