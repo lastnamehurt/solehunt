@@ -11,10 +11,6 @@ class ProfileService(SoleHuntBaseService):
         return cls.getAllObjects()
 
     @classmethod
-    def getOrCreateProfile(cls, filters):
-        cls.getOrCreate(filters)
-
-    @classmethod
     def createNewProfileInstance(cls, filters):
         return cls.prepare(filters)
 

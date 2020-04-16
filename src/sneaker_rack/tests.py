@@ -44,14 +44,14 @@ class SneakerTest(TestCase):
         mockAddSneaker.assert_called_once()
         mockAddSneaker.assert_called_once_with(self.sneaker.id, RACK_ID)
         self.assertEqual(1, mockAddSneaker.call_count)
-        self.assertEqual((1, 1), mockAddSneaker.call_args.args)
+        self.assertEqual((1, 1), mockAddSneaker.call_args.modelId)
 
     @patch('sneaker_rack.services.sneaker_service.SneakerRackService.removeSneaker')
     def testRemoveFromRack(self, mockRemoveSneaker):
         sneakerService.removeFromRack(self.sneaker.id)
         mockRemoveSneaker.assert_called_once()
         mockRemoveSneaker.assert_called_with(self.sneaker.id)
-        self.assertEqual((self.sneaker.id,), mockRemoveSneaker.call_args.args)
+        self.assertEqual((self.sneaker.id,), mockRemoveSneaker.call_args.modelId)
 
     @patch('core.core_repo.BaseRepo.update')
     def testAddFavorite(self, mockUpdate):
