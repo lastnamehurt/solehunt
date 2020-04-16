@@ -15,6 +15,7 @@ class Profile(models.Model):
     isSubscribedToDigest = models.BooleanField(default=False)
     # subscriber = models.ForeignKey("subscribers.Subscriber", null=True, related_name="subscriber", on_delete=models.CASCADE)
     signupConfirmation = models.BooleanField(default=False)
+    isRegistered = models.BooleanField(default=False)
 
     def __str__(self):
         return self.fullName()

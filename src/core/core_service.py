@@ -41,7 +41,6 @@ class SoleHuntBaseService(object):
     @classmethod
     def update(cls, modelId, filters):
         cls.repo.update(modelId, **filters)
-        # cls.repo.save(modelId=modelId)
 
     @classmethod
     def delete(cls, modelId):
