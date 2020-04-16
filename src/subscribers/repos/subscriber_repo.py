@@ -4,7 +4,7 @@ from subscribers.models import Subscriber
 
 class SubscriberRepo(BaseRepo):
 
-    repo = Subscriber
+    model = Subscriber
 
 
 subscriberRepo = SubscriberRepo()

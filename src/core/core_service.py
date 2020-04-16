@@ -28,7 +28,7 @@ class SoleHuntBaseService(object):
         try:
             instance = cls.repo.getById(profileId)
             return instance
-        except cls.repo.repo.DoesNotExist:
+        except cls.repo.model.DoesNotExist:
             logging.info('Model with ID {} does not exist. Creating one'.format(profileId))
             newInstance = cls.repo.create(**filters)
             return newInstance
