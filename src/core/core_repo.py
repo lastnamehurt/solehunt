@@ -44,7 +44,6 @@ class BaseRepo:
 
     def update(self, modelId, **kwargs):
         self.query().filter(id=modelId).update(**kwargs)
-        self.save(modelId=modelId)
 
     def createOrUpdate(self, **kwargs):
         return self.update(kwargs.get('id'), **kwargs) if self.exists(id=kwargs.get('id', None)) else self.create(
