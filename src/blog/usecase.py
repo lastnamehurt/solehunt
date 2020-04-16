@@ -3,14 +3,16 @@ from core.usecase import BaseUseCase
 
 
 class CreateBlogUseCase(BaseUseCase):
-    serviceMethod = blogService.create
+    serviceMethod = blogService.createPost
+
 
 class UpdateBlogUseCase(BaseUseCase):
-    serviceMethod = blogService.update
+    serviceMethod = blogService.updatePostById
+
 
 class DeleteBlogUseCase(BaseUseCase):
-    serviceMethod = blogService.delete
+    serviceMethod = blogService.deletePostById
+
 
 class GetBlogUseCase(BaseUseCase):
-    serviceMethod = blogService.get
-
+    serviceMethod = blogService.getPostById
