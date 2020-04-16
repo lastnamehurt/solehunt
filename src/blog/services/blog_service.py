@@ -1,7 +1,10 @@
+from core.core_service import SoleHuntBaseService
 from blog.repos.solehunt_blog_repo import blogRepo
 
 
-class BlogService(object):
+class BlogService(SoleHuntBaseService):
+
+    repo = blogRepo.repo
 
     @classmethod
     def getPostById(cls, postId):
