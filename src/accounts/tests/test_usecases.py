@@ -5,7 +5,7 @@ from accounts.usecase import CreateProfileUseCase
 from accounts.usecase import DeleteProfileUseCase
 from accounts.usecase import GetProfilesUseCase
 from accounts.usecase import UpdateProfileUseCase
-from core.usecase import UseCaseManager
+from core.usecases import UseCaseManager
 from utils.helpers import copyAndUpdateDict
 
 

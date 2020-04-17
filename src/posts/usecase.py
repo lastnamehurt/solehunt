@@ -1,4 +1,4 @@
-from core.usecase import BaseUseCase
+from core.usecases import BaseUseCase
 from posts.services import postService
 
 

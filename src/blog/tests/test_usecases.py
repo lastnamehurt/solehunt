@@ -5,7 +5,7 @@ from blog.usecase import CreateBlogUseCase
 from blog.usecase import DeleteBlogUseCase
 from blog.usecase import GetBlogUseCase
 from blog.usecase import UpdateBlogUseCase
-from core.usecase import UseCaseManager
+from core.usecases import UseCaseManager
 from utils.helpers import copyAndUpdateDict
 
 

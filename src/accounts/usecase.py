@@ -1,5 +1,5 @@
 from accounts.services import profileService
-from core.usecase import BaseUseCase
+from core.usecases import BaseUseCase
 
 
 class CreateProfileUseCase(BaseUseCase):

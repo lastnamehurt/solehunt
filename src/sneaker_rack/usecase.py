@@ -1,4 +1,4 @@
-from core.usecase import BaseUseCase
+from core.usecases import BaseUseCase
 from sneaker_rack.services.sneaker_service import rackService
 from sneaker_rack.services.sneaker_service import sneakerService
 

@@ -1,5 +1,5 @@
 from blog.services import blogService
-from core.usecase import BaseUseCase
+from core.usecases import BaseUseCase
 
 
 class CreateBlogUseCase(BaseUseCase):

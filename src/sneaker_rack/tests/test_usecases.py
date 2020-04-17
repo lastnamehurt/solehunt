@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from core.usecase import UseCaseManager
+from core.usecases import UseCaseManager
 from sneaker_rack.usecase import CreateSneakerRackUseCase
 from sneaker_rack.usecase import CreateSneakerUseCase
 from sneaker_rack.usecase import DeleteSneakerRackUseCase

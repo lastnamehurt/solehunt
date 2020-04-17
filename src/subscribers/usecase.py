@@ -1,18 +1,26 @@
+from core.usecases import BaseUseCase
 from subscribers.services.subscriber_service import subscriberService
-from core.usecase import BaseUseCase
 
 
 class CreateSubscriberUseCase(BaseUseCase):
-    serviceMethod = subscriberService.create
+    serviceMethod = subscriberService.createNewSubscriber
 
 
 class UpdateSubscriberUseCase(BaseUseCase):
-    serviceMethod = subscriberService.update
+    serviceMethod = subscriberService.updateSubscriberById
 
 
 class GetSubscriberUseCase(BaseUseCase):
-    serviceMethod = subscriberService.get
+    serviceMethod = subscriberService.getSubscriberById
 
 
 class DeleteSubscriberUseCase(BaseUseCase):
-    serviceMethod = subscriberService.delete
+    serviceMethod = subscriberService.deleteSubscriberById
+
+
+class ActivateSubscriptionUseCase(BaseUseCase):
+    serviceMethod = subscriberService.activateSubscription
+
+
+class DeactivateSubscriptionUseCase(BaseUseCase):
+    serviceMethod = subscriberService.deactivateSubscription
