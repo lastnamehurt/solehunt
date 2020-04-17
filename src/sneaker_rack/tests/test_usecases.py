@@ -24,6 +24,7 @@ class FILTERS:
     UPDATE_SNEAKER = copyAndUpdateDict(CREATE_SNEAKER, {'body': 'hunting season!'})
     CREATE_RACK = {'subscriber': subscriberSeeder.seedSubscriber()}
 
+
 class SneakerUseCaseTest(TestCase):
 
     @patch('core.core_repo.BaseRepo.create')
