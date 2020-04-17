@@ -19,7 +19,7 @@ class FILTERS:
     UPDATE_BLOG = copyAndUpdateDict(CREATE_BLOG, {'body': 'hunting season!'})
 
 
-class ProfileUseCaseTest(TestCase):
+class BlogUseCaseTest(TestCase):
 
     @patch('core.core_repo.BaseRepo.create')
     def testCreateBlog(self, mockCreate):
@@ -38,6 +38,6 @@ class ProfileUseCaseTest(TestCase):
         mockDelete.assert_called_once_with(1)
 
     @patch('core.core_repo.BaseRepo.getById')
-    def testGetProfiles(self, mockGetAllObjects):
+    def testGetBlog(self, mockGetAllObjects):
         UseCaseManager(GetBlogUseCase, modelId=1).execute()
         mockGetAllObjects.assert_called_once()
