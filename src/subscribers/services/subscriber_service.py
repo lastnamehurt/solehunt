@@ -4,7 +4,6 @@ from subscribers.repos import subscriberRepo
 
 # TODO: churt refactor this service to inherit SoleHuntBaseService
 class SubscriberService(SoleHuntBaseService):
-
     repo = subscriberRepo.model
 
     @staticmethod
@@ -17,8 +16,8 @@ class SubscriberService(SoleHuntBaseService):
             subscriberRepo.deleteById(subscriberId)
 
     @staticmethod
-    def updateSubscriberById(subscriberId, **kwargs):
-        subscriberRepo.update(subscriberId, **kwargs)
+    def updateSubscriberById(subscriberId, filters):
+        subscriberRepo.update(subscriberId, **filters)
 
     @staticmethod
     def updateSubscribersById(subscriberIds, **kwargs):
@@ -55,6 +54,18 @@ class SubscriberService(SoleHuntBaseService):
     @staticmethod
     def allSubscribersCount():
         return subscriberRepo.query().all().count()
+
+    @classmethod
+    def activateSubscription(cls, subscriberId):
+        subscriber = subscriberRepo.getById(subscriberId)
+        subscriber.isActive = True
+        subscriber.save()
+
+    @classmethod
+    def deactivateSubscription(cls, subscriberId):
+        subscriber = subscriberRepo.getById(subscriberId)
+        subscriber.isActive = False
+        subscriber.save()
 
 
 subscriberService = SubscriberService()

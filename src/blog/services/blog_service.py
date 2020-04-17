@@ -36,8 +36,8 @@ class BlogService(SoleHuntBaseService):
             blogRepo.deleteById(postId)
 
     @classmethod
-    def updatePostById(cls, postId, **kwargs):
-        return blogRepo.update(postId, **kwargs)
+    def updatePostById(cls, postId, filters):
+        return blogRepo.update(postId, **filters)
 
     @classmethod
     def updateOrCreatePost(cls, **kwargs):

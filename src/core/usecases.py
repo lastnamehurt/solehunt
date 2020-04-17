@@ -5,6 +5,8 @@ class BaseUseCase:
 
     @classmethod
     def execute(cls):
+        if cls.modelId and cls.filters:
+            return cls.serviceMethod(cls.modelId, filters=cls.filters)
         if cls.modelId and not cls.filters:
             return cls.serviceMethod(cls.modelId)
 
@@ -16,8 +18,10 @@ class BaseUseCase:
 
 class UseCaseManager:
 
-    def __init__(self, serviceMethod=None, filters=None, modelId=None):
-        self.serviceMethod = serviceMethod
+    def __init__(self, useCase, filters=None, modelId=None):
+        if filters is None:
+            filters = {}
+        self.serviceMethod = useCase.serviceMethod
         self.filters = filters
         self.modelId = modelId
 
