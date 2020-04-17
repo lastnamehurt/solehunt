@@ -1,5 +1,6 @@
 from core.usecases import BaseUseCase
 from posts.services import postService
+from posts.services.likes_service import likesService
 
 
 class CreatePostUseCase(BaseUseCase):
@@ -16,3 +17,7 @@ class DeletePostUseCase(BaseUseCase):
 
 class GetPostUseCase(BaseUseCase):
     serviceMethod = postService.get
+
+
+class LikePostUseCase(BaseUseCase):
+    serviceMethod = likesService.likePost

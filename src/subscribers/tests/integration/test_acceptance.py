@@ -4,6 +4,9 @@ RULE: must follow SoleHunt IG or Twitter to be subscribed
 from unittest import TestCase
 
 from core.usecases import UseCaseManager
+from posts.tests.test_usecases import FILTERS as POST_FILTERS
+from posts.usecase import CreatePostUseCase
+from posts.usecase import LikePostUseCase
 from subscribers.seed import subscriberSeeder
 from subscribers.usecase import ActivateSubscriptionUseCase
 from subscribers.usecase import CreateSubscriberSneakerUseCase
@@ -24,6 +27,16 @@ class SubscriptionTest(TestCase):
         self.subscriber.isActive = False
         self.subscriber.save()
         UseCaseManager(CreateSubscriberSneakerUseCase, modelId=self.subscriber.id, filters=sneakerData).execute()
+
+        # add subscriber to post model
+        self.postData = POST_FILTERS.CREATE_POST.copy()
+        self.postData['subscriber'] = self.subscriber
+
+        # remove hard-coded post_id since this creates a post
+        del self.postData['post_id']
+
+        # setup Post integration
+        self.post = UseCaseManager(CreatePostUseCase, filters=self.postData).execute()
 
     def testSubscribe(self):
         UseCaseManager(ActivateSubscriptionUseCase, modelId=self.subscriber.id).execute()
@@ -66,13 +79,17 @@ class SubscriptionTest(TestCase):
         self.assertFalse(sneaker.isFavorite)
 
     def testPostToWall(self):
-        pass
-
-    def testManageFavoriteSneakers(self):
-        pass
+        self.assertEqual(self.postData['subscriber'], self.post.subscriber)
+        self.assertEqual(self.postData['title'], self.post.title)
+        self.assertEqual(self.postData['body'], self.post.body)
+        self.assertIsNotNone(self.post.timestamp)
+        self.assertEqual(self.subscriber.posts.count(), 1)
 
     def testLikePost(self):
-        pass
+        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post':
+            self.post}).execute()
+        self.assertEqual(self.subscriber.id, like.subscriber_id)
+        self.assertEqual(self.post.id, like.post_id)
 
     def testViewBlogs(self):
         """
@@ -85,3 +102,6 @@ class SubscriptionTest(TestCase):
         A post is an internal post from Subscribers
         """
         pass
+
+    # def testManageFavoriteSneakers(self):
+    #     pass
