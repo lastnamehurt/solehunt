@@ -1,10 +1,10 @@
 from core.core_service import SoleHuntBaseService
-from sneaker_rack.repos import rackRepo, sneakerRepo
+from sneaker_rack.repos import rackRepo
+from sneaker_rack.repos import sneakerRepo
 from utils.helpers import reloadObject
 
 
 class SneakerService(SoleHuntBaseService):
-
     repo = sneakerRepo
 
     @classmethod
@@ -23,8 +23,8 @@ class SneakerService(SoleHuntBaseService):
     def removeFavorite(cls, sneakerId):
         cls.repo.update(sneakerId, {'isFavorite': False})
 
-class SneakerRackService(SoleHuntBaseService):
 
+class SneakerRackService(SoleHuntBaseService):
     repo = rackRepo
 
     @classmethod

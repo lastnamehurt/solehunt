@@ -43,15 +43,12 @@ class SneakerTest(TestCase):
         self.assertTrue(mockAddSneaker.called)
         mockAddSneaker.assert_called_once()
         mockAddSneaker.assert_called_once_with(self.sneaker.id, RACK_ID)
-        self.assertEqual(1, mockAddSneaker.call_count)
-        self.assertEqual((1, 1), mockAddSneaker.call_args.modelId)
 
     @patch('sneaker_rack.services.sneaker_service.SneakerRackService.removeSneaker')
     def testRemoveFromRack(self, mockRemoveSneaker):
         sneakerService.removeFromRack(self.sneaker.id)
         mockRemoveSneaker.assert_called_once()
         mockRemoveSneaker.assert_called_with(self.sneaker.id)
-        self.assertEqual((self.sneaker.id,), mockRemoveSneaker.call_args.modelId)
 
     @patch('core.core_repo.BaseRepo.update')
     def testAddFavorite(self, mockUpdate):
@@ -77,12 +74,14 @@ class SneakerRackTest(TestCase):
     @patch('core.core_service.SoleHuntBaseService.getByFilters')
     def testGetSneakers(self, mockGet):
         rackService.getSneakers(self.SUBSCRIBER_ID)
+
         mockGet.assert_called_once()
         mockGet.assert_called_with(filters={'subscriber_id': 1})
 
     @patch('django.db.models.base.Model.refresh_from_db')
     def testRefreshRack(self, mockReload):
         rackService.refreshRack(self.rack.id)
+
         mockReload.assert_called()
 
     @patch('core.core_service.SoleHuntBaseService.getByFilters')
