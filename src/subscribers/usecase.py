@@ -24,3 +24,23 @@ class ActivateSubscriptionUseCase(BaseUseCase):
 
 class DeactivateSubscriptionUseCase(BaseUseCase):
     serviceMethod = subscriberService.deactivateSubscription
+
+
+class CreateSubscriberSneakerUseCase(BaseUseCase):
+    serviceMethod = subscriberService.createSneaker
+
+
+class UpdateSubscriberSneakerUseCase(BaseUseCase):
+    serviceMethod = subscriberService.updateSneaker
+
+
+class DeleteSubscriberSneakerUseCase(BaseUseCase):
+    serviceMethod = subscriberService.deleteSneaker
+
+
+class MarkAsFavoriteSneakerUseCase(BaseUseCase):
+    serviceMethod = subscriberService.addSneakerToFavorites
+
+
+class UnmarkFavoriteSneakerUseCase(BaseUseCase):
+    serviceMethod = subscriberService.removeSneakerFromFavorites

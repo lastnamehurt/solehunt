@@ -17,7 +17,7 @@ class Subscriber(models.Model):
 
     @property
     def sneakers(self):
-        return Sneaker.objects.filter(owner_id=self.id)
+        return Sneaker.objects.filter(subscriber_id=self.id)
 
     class Meta:
         db_table = 'subscriber'
