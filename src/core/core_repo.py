@@ -49,8 +49,8 @@ class BaseRepo(object):
         return cls.query().get(id=modelId).delete()
 
     @classmethod
-    def update(cls, modelId, **kwargs):
-        cls.query().filter(id=modelId).update(**kwargs)
+    def update(cls, modelId, filters):
+        cls.query().filter(id=modelId).update(**filters)
 
     @classmethod
     def createOrUpdate(cls, **kwargs):

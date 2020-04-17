@@ -1,4 +1,5 @@
 from core.core_service import SoleHuntBaseService
+from sneaker_rack.services.sneaker_service import sneakerService
 from subscribers.repos import subscriberRepo
 
 
@@ -66,6 +67,28 @@ class SubscriberService(SoleHuntBaseService):
         subscriber = subscriberRepo.getById(subscriberId)
         subscriber.isActive = False
         subscriber.save()
+
+    @classmethod
+    def createSneaker(cls, subscriberId, filters):
+        subscriber = subscriberRepo.getById(subscriberId)
+        filters['subscriber'] = subscriber
+        sneakerService.create(filters=filters)
+
+    @classmethod
+    def updateSneaker(cls, sneakerId, filters):
+        sneakerService.update(sneakerId, filters)
+
+    @classmethod
+    def deleteSneaker(cls, sneakerId):
+        sneakerService.delete(sneakerId)
+
+    @classmethod
+    def addSneakerToFavorites(cls, sneakerId):
+        sneakerService.makeFavorite(sneakerId)
+
+    @classmethod
+    def removeSneakerFromFavorites(cls, sneakerId):
+        sneakerService.removeFavorite(sneakerId)
 
 
 subscriberService = SubscriberService()
