@@ -45,8 +45,13 @@ INSTALLED_APPS = [
     'blog',
     'sneaker_rack',
     'posts',
+    'graphene_django',
 
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'gql.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

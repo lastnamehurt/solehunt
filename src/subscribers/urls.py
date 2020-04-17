@@ -1,8 +1,8 @@
-# from django.urls import path
-# from subscribers import views
+from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
 
-# urlpatterns = [
-#     path('subscribers/', views.subscriber_list),
-#     path('subscribers/<int:pk>/', views.subscriber_detail),
-# ]
-urlpatterns = []
+
+urlpatterns = [
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+]

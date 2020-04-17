@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.urls import include, path
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
 from rest_framework import routers, serializers, viewsets
 
 from accounts.views import (activate, activation_sent_view, home_view,
@@ -37,4 +39,5 @@ urlpatterns = [
     # imported urls
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('custom_api/', include('subscribers.urls')),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ]
