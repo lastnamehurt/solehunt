@@ -1,6 +1,6 @@
 # solehunt
 
-## Tech Stack
+## Stack
 - Django
 - Python 3.8  
 - React
