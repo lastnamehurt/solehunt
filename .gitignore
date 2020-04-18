@@ -4,4 +4,4 @@ static/
 *.pyc
 db.sqlite3
 .idea
-**/local_*
+app/solehunt/local_*
