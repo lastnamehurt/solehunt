@@ -8,7 +8,7 @@
 - Cypress
 
 ## System Design
-### Solehunt uses a **Layered Architecture** pattern with the below layers: 
+### Solehunt uses a **layered** pattern with the below layers: 
 
 #### Repos
 
