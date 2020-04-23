@@ -1,6 +1,5 @@
 from django.db import models
 
-from accounts.models import Profile
 from posts.models import Post
 from sneaker_rack.models import Sneaker
 
@@ -23,7 +22,7 @@ class Subscriber(models.Model):
     @property
     def posts(self):
         return Post.objects.filter(subscriber_id=self.id)
-    
+
     class Meta:
         db_table = 'subscriber'
         app_label = 'subscribers'

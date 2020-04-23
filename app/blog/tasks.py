@@ -1,5 +1,5 @@
-from celery.task.schedules import crontab
 from celery.decorators import periodic_task
+from celery.task.schedules import crontab
 
 from blog.mappers.type_mapper import ResponseType
 from blog.services import blogService

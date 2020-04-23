@@ -1,4 +1,5 @@
-from sneaker_rack.services.sneaker_service import rackService, sneakerService
+from sneaker_rack.services.sneaker_service import rackService
+from sneaker_rack.services.sneaker_service import sneakerService
 from subscribers.seed import subscriberSeeder
 
 SNEAKER_DICT = {

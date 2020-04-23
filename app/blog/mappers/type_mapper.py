@@ -1,4 +1,7 @@
-from typing import Dict, List, TypeVar
+from typing import Dict
+from typing import List
+from typing import TypeVar
+
 from blog.models import BlogPost
 
 

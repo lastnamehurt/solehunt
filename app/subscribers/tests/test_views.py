@@ -1,6 +1,7 @@
 import json
 
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APIClient
+from rest_framework.test import APITestCase
 
 from subscribers.models import Subscriber
 from subscribers.services.subscriber_service import subscriberService

@@ -1,11 +1,9 @@
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 from django.test import TestCase
 
 from blog import tasks as blogTasks
-from blog.models import BlogPost
 from blog.seed import blogSeeder
-from blog.tests.responses import parsedResponse
 
 
 class BlogTasksTest(TestCase):

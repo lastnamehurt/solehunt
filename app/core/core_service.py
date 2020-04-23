@@ -2,7 +2,6 @@ import logging
 
 
 class SoleHuntBaseService(object):
-
     repo = None
 
     @classmethod

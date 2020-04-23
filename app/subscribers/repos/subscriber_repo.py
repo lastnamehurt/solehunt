@@ -3,7 +3,6 @@ from subscribers.models import Subscriber
 
 
 class SubscriberRepo(BaseRepo):
-
     model = Subscriber
 
 

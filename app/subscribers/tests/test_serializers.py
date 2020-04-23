@@ -5,6 +5,7 @@ from django.test import TestCase
 from subscribers.serializers import SubscriberSerializer
 from subscribers.services.subscriber_service import subscriberService
 
+
 @unittest.skip
 class SubscriberSerializerTest(TestCase):
     @classmethod

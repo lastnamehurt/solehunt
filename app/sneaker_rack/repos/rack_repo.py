@@ -1,5 +1,6 @@
 from core.core_repo import BaseRepo
-from sneaker_rack.models import Sneaker, SneakerRack
+from sneaker_rack.models import Sneaker
+from sneaker_rack.models import SneakerRack
 
 """
 IMPORTANT IF YOU'D LIKE TO SAVE TIME

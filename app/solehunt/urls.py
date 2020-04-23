@@ -1,13 +1,18 @@
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User
-from django.urls import include, path
+from django.urls import include
+from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers
+from rest_framework import serializers
+from rest_framework import viewsets
 
-from accounts.views import (activate, activation_sent_view, home_view,
-                            signup_view)
+from accounts.views import activate
+from accounts.views import activation_sent_view
+from accounts.views import home_view
+from accounts.views import signup_view
 # Serializers define the API representation.
 from subscribers.views import SubscriberViewSet
 

@@ -1,11 +1,15 @@
 import json
-from typing import Any, Callable
+from typing import Any
+from typing import Callable
 
 import requests
 
-from solehunt.settings import BLOG_DOMAIN, GHOST_CONTENT_API_KEY, VERSION
+from solehunt.settings import BLOG_DOMAIN
+from solehunt.settings import GHOST_CONTENT_API_KEY
+from solehunt.settings import VERSION
 
-RESOURCE_URL: Callable[[Any], str] = lambda target: f'https://{BLOG_DOMAIN}/ghost/api/{VERSION}/content/{target}/?key={GHOST_CONTENT_API_KEY}'
+RESOURCE_URL: Callable[[Any], str] = lambda \
+    target: f'https://{BLOG_DOMAIN}/ghost/api/{VERSION}/content/{target}/?key={GHOST_CONTENT_API_KEY}'
 
 
 class GHOST_ENDPOINTS:

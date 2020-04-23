@@ -21,4 +21,3 @@ class DeleteProfileUseCase(BaseUseCase):
 class DeactivateRegistrationUseCase(BaseUseCase):
     filters = {'isRegistered': False}
     serviceMethod = profileService.update
-

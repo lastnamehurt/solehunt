@@ -159,7 +159,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Los Angeles'
 
-
 try:
     from local_settings import *
 except ImportError:

@@ -1,6 +1,5 @@
 from django.test import TestCase
-from unittest.mock import patch
-from blog.tests.responses import getPostByIdResponse
+
 
 # Create your tests here.
 class BlogApiServiceTests(TestCase):

@@ -2,8 +2,11 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from sneaker_rack.seed import SNEAKER_DICT, rackSeeder, sneakerSeeder
-from sneaker_rack.services.sneaker_service import rackService, sneakerService
+from sneaker_rack.seed import SNEAKER_DICT
+from sneaker_rack.seed import rackSeeder
+from sneaker_rack.seed import sneakerSeeder
+from sneaker_rack.services.sneaker_service import rackService
+from sneaker_rack.services.sneaker_service import sneakerService
 # Create your tests here.
 from subscribers.services.subscriber_service import subscriberService
 from utils.helpers import reloadObject

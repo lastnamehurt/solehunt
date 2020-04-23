@@ -3,7 +3,6 @@ from core.core_service import SoleHuntBaseService
 
 
 class ProfileService(SoleHuntBaseService):
-
     repo = profileRepo
 
     @classmethod

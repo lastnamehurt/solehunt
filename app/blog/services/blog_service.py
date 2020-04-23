@@ -1,9 +1,8 @@
-from core.core_service import SoleHuntBaseService
 from blog.repos.solehunt_blog_repo import blogRepo
+from core.core_service import SoleHuntBaseService
 
 
 class BlogService(SoleHuntBaseService):
-
     repo = blogRepo.model
 
     @classmethod

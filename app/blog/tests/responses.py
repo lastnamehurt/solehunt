@@ -29,10 +29,10 @@ getPostByIdResponse = {'posts': [{'id': '5e69a9627e0f421170d2d965',
                                   'meta_description': 'A new sneaker community launching 2020 ',
                                   'email_subject': None}]}
 parsedResponse = {
-                  'post_id': '369e7878-e78a-4e5f-ab76-c5313fa32398',
-                  'slug': 'test-blogo',
-                  'title': 'Test Blog',
-                  'body': '<h1 id="intro-to-solehunt">Intro to Solehunt</h1><h3 id="mission">Mission</h3><p></p>',
-                  'timestamp': '2020-03-11T20:23:35.000-07:00',
-                  'url': 'https://blog.solehunt.com/test-blogo/',
-                  'excerpt': 'Intro to Solehunt\nMission'}
+    'post_id': '369e7878-e78a-4e5f-ab76-c5313fa32398',
+    'slug': 'test-blogo',
+    'title': 'Test Blog',
+    'body': '<h1 id="intro-to-solehunt">Intro to Solehunt</h1><h3 id="mission">Mission</h3><p></p>',
+    'timestamp': '2020-03-11T20:23:35.000-07:00',
+    'url': 'https://blog.solehunt.com/test-blogo/',
+    'excerpt': 'Intro to Solehunt\nMission'}

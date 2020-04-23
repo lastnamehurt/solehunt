@@ -9,4 +9,5 @@ class LikesService(SoleHuntBaseService):
     def likePost(cls, filters):
         return cls.create(filters)
 
+
 likesService = LikesService()

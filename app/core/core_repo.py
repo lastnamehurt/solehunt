@@ -1,5 +1,3 @@
-
-
 class BaseRepo(object):
     __metaclass__ = None
 

@@ -1,7 +1,6 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-
 from core.usecases import UseCaseManager
 from posts.usecase import CreatePostUseCase
 from posts.usecase import DeletePostUseCase

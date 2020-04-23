@@ -11,7 +11,7 @@ class Sneaker(models.Model):
     style = models.CharField(max_length=50)
     isFavorite = models.BooleanField(default=False)
     subscriber = models.ForeignKey("subscribers.Subscriber", related_name='subscriber', null=True,
-                              on_delete=models.SET_NULL)
+                                   on_delete=models.SET_NULL)
     rack = models.ForeignKey('SneakerRack', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):

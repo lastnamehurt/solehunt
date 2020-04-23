@@ -4,7 +4,7 @@ from blog.services import blogService
 
 class GhostApiMapper:
 
-    # TODO: churt make this better than O(n) size with O(n+1) space. It's ugly
+    # TODO: churt make this more optimal than O(n) size with O(n) space. It's ugly
     @classmethod
     def toBlogModel(cls, apiResponses: ResponseType.GET_POSTS) -> ResponseType.BLOG_POSTS:
         newBlogs = []
