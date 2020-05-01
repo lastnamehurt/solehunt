@@ -18,7 +18,6 @@ class GhostApiMapper:
     def parseBlogPost(cls, apiResponse: ResponseType.POST) -> ResponseType.PARSED:
         return {
             'post_id': apiResponse['id'],
-            # 'author': response['author'],
             'slug': apiResponse['slug'],
             'title': apiResponse['title'],
             'body': apiResponse['html'],
