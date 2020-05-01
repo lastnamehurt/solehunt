@@ -7,8 +7,8 @@ class GhostApiMapper:
     # TODO: churt make this better than O(n) size with O(n+1) space. It's ugly
     @classmethod
     def toBlogModel(cls, apiResponses: ResponseType.GET_POSTS) -> ResponseType.BLOG_POSTS:
-        newBlogs = []
         postsData = apiResponses['posts']
+        newBlogs = [None] * len(postsData)
         for postData in postsData:
             data = cls.parseBlogPost(postData)
             newBlogs.append(blogService.prepare(filters=data))
