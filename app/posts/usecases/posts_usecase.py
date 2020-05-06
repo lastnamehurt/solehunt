@@ -1,6 +1,6 @@
 from core.usecases import BaseUseCase
 from posts.services import postService
-from posts.services.likes_service import likesService
+from posts.services.likes_service import likeService
 
 
 class CreatePostUseCase(BaseUseCase):
@@ -20,4 +20,18 @@ class GetPostUseCase(BaseUseCase):
 
 
 class LikePostUseCase(BaseUseCase):
-    serviceMethod = likesService.likePost
+    filters = {'isActive': True}
+    serviceMethod = likeService.likePost
+
+
+class UnlikePostUseCase(BaseUseCase):
+    filters = {'isActive': False}
+    serviceMethod = likeService.unlikePost
+
+
+class LikesCountUseCase(BaseUseCase):
+    serviceMethod = likeService.getLikeCount
+
+
+class GetSubscriberByLikesUseCase(BaseUseCase):
+    serviceMethod = likeService.getSubscriber

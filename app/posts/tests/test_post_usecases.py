@@ -1,12 +1,11 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-
 from core.usecases import UseCaseManager
-from posts.usecase import CreatePostUseCase
-from posts.usecase import DeletePostUseCase
-from posts.usecase import GetPostUseCase
-from posts.usecase import UpdatePostUseCase
+from posts.usecases.posts_usecase import CreatePostUseCase
+from posts.usecases.posts_usecase import DeletePostUseCase
+from posts.usecases.posts_usecase import GetPostUseCase
+from posts.usecases.posts_usecase import UpdatePostUseCase
 from utils.helpers import copyAndUpdateDict
 
 
