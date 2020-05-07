@@ -8,7 +8,7 @@ class CreatePostUseCase(BaseUseCase):
 
 
 class UpdatePostUseCase(BaseUseCase):
-    serviceMethod = postService.update
+    serviceMethod = postService.editPost
 
 
 class DeletePostUseCase(BaseUseCase):

@@ -18,6 +18,7 @@ from posts.usecases.posts_usecase import LikesCountUseCase
 from posts.usecases.posts_usecase import UndeletePostUseCase
 from posts.usecases.posts_usecase import UnlikePostUseCase
 from subscribers.seed import subscriberSeeder
+from subscribers.services.subscriber_service import subscriberService
 from subscribers.usecase import ActivateSubscriptionUseCase
 from subscribers.usecase import CreateSubscriberSneakerUseCase
 from subscribers.usecase import DeactivateSubscriptionUseCase
@@ -34,7 +35,7 @@ class SubscriptionTest(TestCase):
 
     def setUp(self):
         self.subscriber = subscriberSeeder.seedSubscriber()
-        self.subscriber.isLiked = False
+        self.subscriber.isActive = False
         self.subscriber.save()
         UseCaseManager(CreateSubscriberSneakerUseCase, modelId=self.subscriber.id, filters=sneakerData).execute()
 
@@ -56,9 +57,11 @@ class SubscriptionTest(TestCase):
 
     def testUnsubscribe(self):
         # first force to active state
-        self.subscriber.isLiked = True
+        self.subscriber.isActive = True
         self.subscriber.save()
         UseCaseManager(DeactivateSubscriptionUseCase, modelId=self.subscriber.id).execute()
+        reloadObject(self.subscriber)
+        self.assertFalse(self.subscriber.isActive)
 
     def testCreateSneaker(self):
         self.assertEqual(self.subscriber.sneakers.count(), 1)
@@ -99,44 +102,59 @@ class SubscriptionTest(TestCase):
     def testLikePost(self):
         UseCaseManager(LikePostUseCase, filters={'likedBy_id': self.subscriber.id, 'post_id': self.postId}).execute()
         like = likeService.getLikeByPostIdAndLikedById(self.postId, self.subscriber.id)
+
         self.assertEqual(self.subscriber.id, self.post.subscriber_id)
         self.assertEqual(self.post.id, like.post_id)
 
-    # TODO : churt add assertions
-    @skip
     def testUnlikePost(self):
-        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
-        UseCaseManager(UnlikePostUseCase, filters={'modelId': like.id}).execute()
-    # TODO : churt add assertions
-    @skip
+        like = likeSeeder.seedLike()
+        UseCaseManager(UnlikePostUseCase, modelId=like.id).execute()
+        reloadObject(like)
+
+        self.assertFalse(like.isActive)
+
     def testLikesCount(self):
-        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
-        UseCaseManager(LikesCountUseCase, filters={'modelId': like.id}).execute()
-    # TODO : churt add assertions
-    @skip
-    def testLikesBySubscriber(self):
-        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
-        UseCaseManager(GetSubscriberByLikesUseCase, filters={'modelId': like.id}).execute()
+        likeService.getAllObjects().delete()
+
+        self.assertEqual(0, likeService.getAllObjects().count())
+
+        like = likeSeeder.seedLike()
+        UseCaseManager(LikesCountUseCase, modelId=like.post_id).execute()
+
+        self.assertEqual(1, like.post.likes.count())
+
+    def testGetSubscriberByLikeId(self):
+        """
+        Test Get Subscriber from given like
+        """
+        like = likeSeeder.seedLike()
+        subscriber = UseCaseManager(GetSubscriberByLikesUseCase, modelId=like.id).execute()
+
+        self.assertEqual(like.post.subscriber.id, subscriber.id)
 
     def testDeletePost(self):
         UseCaseManager(DeletePostUseCase, modelId=self.post.id).execute()
         reloadObject(self.post)
+
         self.assertFalse(self.post.isActive)
 
     def testUndeletePost(self):
         # delete post first
         postService.deletePost(self.post.id)
         reloadObject(self.post)
+
         self.assertFalse(self.post.isActive)
 
         # Un-delete
         UseCaseManager(UndeletePostUseCase, modelId=self.post.id).execute()
         reloadObject(self.post)
+
         self.assertTrue(self.post.isActive)
 
     def testViewBlogs(self):
         """
-        A blog is a post from Ghost, written by a contributor
+        A blog is a post from Ghost written by a contributor (Subscriber.isContributor)
+        A Profile can_view_blogs
         """
         pass
 
@@ -153,11 +171,13 @@ class SubscriptionTest(TestCase):
         pass
 
     def testGetLikesForPost(self):
+        # delete all likes
+        likeService.getAllObjects().delete()
+        # seed new like for test
         likeSeeder.seedLike()
         likes = UseCaseManager(GetLikesUseCase, filters={'post_id': 1, 'likedBy_id': 1}).execute()
-        self.assertEqual(1, likes.count())
-
         like = likes.first()
 
+        self.assertEqual(1, likes.count())
         self.assertEqual(like.post_id, 1)
         self.assertEqual(like.likedBy_id, 1)

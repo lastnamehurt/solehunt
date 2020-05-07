@@ -59,13 +59,13 @@ class SubscriberService(SoleHuntBaseService):
     @classmethod
     def activateSubscription(cls, subscriberId):
         subscriber = subscriberRepo.getById(subscriberId)
-        subscriber.isLiked = True
+        subscriber.isActive = True
         subscriber.save()
 
     @classmethod
     def deactivateSubscription(cls, subscriberId):
         subscriber = subscriberRepo.getById(subscriberId)
-        subscriber.isLiked = False
+        subscriber.isActive = False
         subscriber.save()
 
     @classmethod

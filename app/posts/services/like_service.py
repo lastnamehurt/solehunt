@@ -3,6 +3,7 @@ import logging
 from core.core_service import SoleHuntBaseService
 from posts.mappers.type_mapper import LikeSchema
 from posts.repos.likes_repo import likesRepo
+from subscribers.models import Subscriber
 
 log = logging.getLogger(__name__)
 
@@ -51,7 +52,7 @@ class LikeService(SoleHuntBaseService):
         return cls.repo.query().filter(post_id=postId, isActive=True).count()
 
     @classmethod
-    def getSubscriberByLikeId(cls, likeId):
+    def getSubscriberByLikeId(cls, likeId: int) -> Subscriber:
         return cls.get(likeId).post.subscriber
 
     @classmethod

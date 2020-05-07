@@ -13,5 +13,9 @@ class PostService(SoleHuntBaseService):
     def undeletePost(cls, postId):
         cls.update(postId, {'isActive': True})
 
+    @classmethod
+    def editPost(cls, postId, filters):
+        cls.update(postId, filters)
+
 
 postService = PostService()
