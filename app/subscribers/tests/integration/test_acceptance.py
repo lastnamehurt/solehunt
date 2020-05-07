@@ -2,11 +2,21 @@
 RULE: must follow SoleHunt IG or Twitter to be subscribed
 """
 from unittest import TestCase
+from unittest import skip
 
 from core.usecases import UseCaseManager
-from posts.tests.test_usecases import FILTERS as POST_FILTERS
-from posts.usecase import CreatePostUseCase
-from posts.usecase import LikePostUseCase
+from posts.seed import likeSeeder
+from posts.services import postService
+from posts.services.like_service import likeService
+from posts.tests.test_post_usecases import PostFilters as POST_FILTERS
+from posts.usecases.posts_usecase import CreatePostUseCase
+from posts.usecases.posts_usecase import DeletePostUseCase
+from posts.usecases.posts_usecase import GetLikesUseCase
+from posts.usecases.posts_usecase import GetSubscriberByLikesUseCase
+from posts.usecases.posts_usecase import LikePostUseCase
+from posts.usecases.posts_usecase import LikesCountUseCase
+from posts.usecases.posts_usecase import UndeletePostUseCase
+from posts.usecases.posts_usecase import UnlikePostUseCase
 from subscribers.seed import subscriberSeeder
 from subscribers.usecase import ActivateSubscriptionUseCase
 from subscribers.usecase import CreateSubscriberSneakerUseCase
@@ -24,7 +34,7 @@ class SubscriptionTest(TestCase):
 
     def setUp(self):
         self.subscriber = subscriberSeeder.seedSubscriber()
-        self.subscriber.isActive = False
+        self.subscriber.isLiked = False
         self.subscriber.save()
         UseCaseManager(CreateSubscriberSneakerUseCase, modelId=self.subscriber.id, filters=sneakerData).execute()
 
@@ -37,6 +47,7 @@ class SubscriptionTest(TestCase):
 
         # setup Post integration
         self.post = UseCaseManager(CreatePostUseCase, filters=self.postData).execute()
+        self.postId = self.post.id
 
     def testSubscribe(self):
         UseCaseManager(ActivateSubscriptionUseCase, modelId=self.subscriber.id).execute()
@@ -45,7 +56,7 @@ class SubscriptionTest(TestCase):
 
     def testUnsubscribe(self):
         # first force to active state
-        self.subscriber.isActive = True
+        self.subscriber.isLiked = True
         self.subscriber.save()
         UseCaseManager(DeactivateSubscriptionUseCase, modelId=self.subscriber.id).execute()
 
@@ -86,10 +97,42 @@ class SubscriptionTest(TestCase):
         self.assertEqual(self.subscriber.posts.count(), 1)
 
     def testLikePost(self):
-        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post':
-            self.post}).execute()
-        self.assertEqual(self.subscriber.id, like.subscriber_id)
+        UseCaseManager(LikePostUseCase, filters={'likedBy_id': self.subscriber.id, 'post_id': self.postId}).execute()
+        like = likeService.getLikeByPostIdAndLikedById(self.postId, self.subscriber.id)
+        self.assertEqual(self.subscriber.id, self.post.subscriber_id)
         self.assertEqual(self.post.id, like.post_id)
+
+    # TODO : churt add assertions
+    @skip
+    def testUnlikePost(self):
+        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
+        UseCaseManager(UnlikePostUseCase, filters={'modelId': like.id}).execute()
+    # TODO : churt add assertions
+    @skip
+    def testLikesCount(self):
+        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
+        UseCaseManager(LikesCountUseCase, filters={'modelId': like.id}).execute()
+    # TODO : churt add assertions
+    @skip
+    def testLikesBySubscriber(self):
+        like = UseCaseManager(LikePostUseCase, filters={'subscriber': self.subscriber, 'post': self.post}).execute()
+        UseCaseManager(GetSubscriberByLikesUseCase, filters={'modelId': like.id}).execute()
+
+    def testDeletePost(self):
+        UseCaseManager(DeletePostUseCase, modelId=self.post.id).execute()
+        reloadObject(self.post)
+        self.assertFalse(self.post.isActive)
+
+    def testUndeletePost(self):
+        # delete post first
+        postService.deletePost(self.post.id)
+        reloadObject(self.post)
+        self.assertFalse(self.post.isActive)
+
+        # Un-delete
+        UseCaseManager(UndeletePostUseCase, modelId=self.post.id).execute()
+        reloadObject(self.post)
+        self.assertTrue(self.post.isActive)
 
     def testViewBlogs(self):
         """
@@ -103,5 +146,18 @@ class SubscriptionTest(TestCase):
         """
         pass
 
-    # def testManageFavoriteSneakers(self):
-    #     pass
+    def testManageFavoriteSneakers(self):
+        """
+        Manage top n sneakers
+        """
+        pass
+
+    def testGetLikesForPost(self):
+        likeSeeder.seedLike()
+        likes = UseCaseManager(GetLikesUseCase, filters={'post_id': 1, 'likedBy_id': 1}).execute()
+        self.assertEqual(1, likes.count())
+
+        like = likes.first()
+
+        self.assertEqual(like.post_id, 1)
+        self.assertEqual(like.likedBy_id, 1)

@@ -1,24 +1,24 @@
-from blog.mappers.type_mapper import ResponseType
+from blog.mappers.type_mapper import ResponseSchema
 from blog.services import blogService
 
 
 class GhostApiMapper:
 
-    # TODO: churt make this better than O(n) size with O(n+1) space. It's ugly
     @classmethod
-    def toBlogModel(cls, apiResponses: ResponseType.GET_POSTS) -> ResponseType.BLOG_POSTS:
-        newBlogs = []
+    def toBlogModel(cls, apiResponses: ResponseSchema.GET_POSTS) -> ResponseSchema.BLOG_POSTS:
         postsData = apiResponses['posts']
+        newBlogs = [None] * len(postsData)
+        blogIndex = 0
         for postData in postsData:
             data = cls.parseBlogPost(postData)
-            newBlogs.append(blogService.prepare(filters=data))
+            newBlogs[blogIndex] = blogService.prepare(filters=data)
+            blogIndex += 1
         return newBlogs
 
     @classmethod
-    def parseBlogPost(cls, apiResponse: ResponseType.POST) -> ResponseType.PARSED:
+    def parseBlogPost(cls, apiResponse: ResponseSchema.POST) -> ResponseSchema.PARSED:
         return {
             'post_id': apiResponse['id'],
-            # 'author': response['author'],
             'slug': apiResponse['slug'],
             'title': apiResponse['title'],
             'body': apiResponse['html'],

@@ -1,16 +1,17 @@
 from core.core_service import SoleHuntBaseService
 from posts.repos.post_repo import PostRepo
-from posts.services.likes_service import likesService
 
 
 class PostService(SoleHuntBaseService):
     repo = PostRepo
 
     @classmethod
-    def getLikes(cls, postId):
-        return likesService.getByFilters({
-            'post_id': postId
-        })
+    def deletePost(cls, postId):
+        cls.update(postId, {'isActive': False})
+
+    @classmethod
+    def undeletePost(cls, postId):
+        cls.update(postId, {'isActive': True})
 
 
 postService = PostService()

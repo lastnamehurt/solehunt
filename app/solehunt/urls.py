@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('custom_api/', include('subscribers.urls')),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('activity/', include('actstream.urls')),
 ]

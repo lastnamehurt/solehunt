@@ -24,7 +24,7 @@ class GHOST_ENDPOINTS:
     SETTINGS = RESOURCE_URL('settings')
 
 
-class GhostAPIWrapper(object):
+class GhostAPIWrapper:
 
     @classmethod
     def getAllPosts(cls):

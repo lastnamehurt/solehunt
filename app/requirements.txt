@@ -3,6 +3,7 @@ aniso8601==7.0.0
 anyjson==0.3.3
 appnope==0.1.0
 asgiref==3.2.3
+astroid==2.4.0
 backcall==0.1.0
 billiard==3.3.0.23
 celery==3.1.25
@@ -10,10 +11,12 @@ certifi==2019.11.28
 chardet==3.0.4
 decorator==4.4.1
 Django==3.0.3
+django-activity-stream==0.8.0
 django-cors-headers==3.2.1
 django-crispy-forms==1.9.0
 django-extensions==2.2.8
 django-filter==2.2.0
+django-jsonfield==1.4.0
 djangorestframework==3.11.0
 ghost-client==0.0.4
 graphene==2.1.8
@@ -26,8 +29,13 @@ ipython-genutils==0.2.0
 isort==4.3.21
 jedi==0.16.0
 kombu==3.0.37
+lazy-object-proxy==1.4.3
 Markdown==3.2
+mccabe==0.6.1
 mock==4.0.2
+mypy==0.770
+mypy-extensions==0.4.3
+numpy==1.18.2
 parso==0.6.1
 pexpect==4.8.0
 pickleshare==0.7.5
@@ -36,6 +44,9 @@ promise==2.3
 prompt-toolkit==3.0.3
 ptyprocess==0.6.0
 Pygments==2.5.2
+pylint==2.5.0
+pylint-django==2.0.15
+pylint-plugin-utils==0.6
 pytz==2019.3
 redis==2.10.3
 requests==2.22.0
@@ -43,7 +54,11 @@ Rx==1.6.1
 singledispatch==3.4.0.3
 six==1.14.0
 sqlparse==0.3.0
+toml==0.10.0
 traitlets==4.3.3
+typed-ast==1.4.1
+typing-extensions==3.7.4.2
 urllib3==1.25.8
 vine==1.3.0
 wcwidth==0.1.8
+wrapt==1.12.1

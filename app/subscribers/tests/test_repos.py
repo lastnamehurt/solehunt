@@ -31,6 +31,6 @@ class SubscriberRepoTest(TestCase):
         self.assertNotIsInstance(obj, Subscriber)
 
     def testGetByFilter(self):
-        obj = self.repo.getByFilter(alias='testGetByFilter')
+        obj = self.repo.getByFilter({'alias': 'testGetByFilter'})
         self.assertIsInstance(obj.first(), Subscriber)
         self.assertTrue(obj.first().alias == 'testGetByFilter')

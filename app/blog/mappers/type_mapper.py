@@ -2,7 +2,7 @@ from typing import Dict, List, TypeVar
 from blog.models import BlogPost
 
 
-class ResponseType:
+class ResponseSchema:
     POST = Dict[str, str]
     GET_POSTS = Dict[str, List[Dict[str, str]]]
     CREATE = Dict[str, List[Dict[str, str]]]

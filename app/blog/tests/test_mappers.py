@@ -1,10 +1,11 @@
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch
 
 from django.test import TestCase
 
 from blog.mappers.mapper import ghostApiMapper
 from blog.models import BlogPost
-from blog.tests.responses import getPostByIdResponse, parsedResponse
+from blog.tests.responses import getPostByIdResponse
+from blog.tests.responses import parsedResponse
 
 
 class GhostApiMapperTest(TestCase):

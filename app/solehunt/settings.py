@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'sneaker_rack',
     'posts',
     'graphene_django',
+    'actstream',
 
 ]
 
