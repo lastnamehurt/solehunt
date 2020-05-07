@@ -1,6 +1,5 @@
 from django.db import models
 
-from accounts.models import Profile
 from posts.models import Post
 from sneaker_rack.models import Sneaker
 
@@ -14,7 +13,7 @@ class Subscriber(models.Model):
     alias = models.CharField(max_length=100)
     profile = models.ForeignKey("accounts.Profile", related_name='profile', null=True, on_delete=models.CASCADE)
     isActive = models.BooleanField(default=False)
-    isContributor = models.BooleanField(default=False)  # TODO: churt configure rules - maybe data-fix
+    isContributor = models.BooleanField(default=False)
 
     @property
     def sneakers(self):
@@ -23,16 +22,14 @@ class Subscriber(models.Model):
     @property
     def posts(self):
         return Post.objects.filter(subscriber_id=self.id)
-    
+
     class Meta:
         db_table = 'subscriber'
         app_label = 'subscribers'
-        # TODO: churt expand on this implementation
         permissions = [
-            (
-                "can_view_sneakers", "Can View Sneakers"
-                # "is_contributor", "Is Contributor"
-            )
+            ("can_view_sneakers", "Can View Sneakers"),
+            ("is_contributor", "Is Contributor"),
+            ("can_view_blogs", "Can View Blogs"),
         ]
 
     def __str__(self):

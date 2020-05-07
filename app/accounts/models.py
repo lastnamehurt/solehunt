@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, related_name="+", null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     twitter_id = models.CharField(max_length=75)
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
@@ -13,7 +13,8 @@ class Profile(models.Model):
     bio = models.TextField()
     avatar = models.ImageField()
     isSubscribedToDigest = models.BooleanField(default=False)
-    # subscriber = models.ForeignKey("subscribers.Subscriber", null=True, related_name="subscriber", on_delete=models.CASCADE)
+    subscriber = models.OneToOneField("subscribers.Subscriber", related_name='_subscriber', null=True,
+                                      on_delete=models.CASCADE)
     signupConfirmation = models.BooleanField(default=False)
     isRegistered = models.BooleanField(default=False)
 
