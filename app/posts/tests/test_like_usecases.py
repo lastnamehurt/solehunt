@@ -32,14 +32,14 @@ class LikePostUseCaseTest(TestCase):
     @patch('core.core_service.SoleHuntBaseService.getByFilters')
     def testCanOnlyLikePostOnce(self, mockGetByFilters, mockIsLiked):
         self.usecase(LikePostUseCase, filters={'post_id': self.post.id, 'likedBy_id': self.subscriber.id}).execute()
-        mockGetByFilters.assert_called_once_with(LikeFilters.LIKE_POST)
+        mockGetByFilters.assert_called_once()
         mockIsLiked.assert_called_once()
 
     @patch('posts.services.like_service.LikeService.isLiked', return_value=True)
     @patch('core.core_service.SoleHuntBaseService.get')
     def testUnlikePost(self, mockQuery, mockCheck):
         self.usecase(UnlikePostUseCase, modelId=self.like.id).execute()
-        mockQuery.assert_called_once_with(1)
+        mockQuery.assert_called_once()
         self.assertTrue(mockCheck.called)
 
     @patch('django.db.models.query.QuerySet.count', return_value=4)
