@@ -53,7 +53,7 @@ class BlogService(SoleHuntBaseService):
 
     @classmethod
     def prepare(cls, filters):
-        return blogRepo.prepareModel(**filters)
+        return blogRepo.prepareModel(filters)
 
 
 blogService = BlogService()

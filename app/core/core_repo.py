@@ -1,3 +1,4 @@
+from utils.helpers import reloadObject
 
 
 class BaseRepo(object):
@@ -18,31 +19,31 @@ class BaseRepo(object):
         return cls.query().all()
 
     @classmethod
-    def count(cls, **kwargs):
-        return cls.query().filter(**kwargs).count()
+    def count(cls, filters):
+        return cls.query().filter(**filters).count()
 
     @classmethod
     def getById(cls, modelId):
         return cls._get(modelId)
 
     @classmethod
-    def getByFilter(cls, **kwargs):
+    def getByFilter(cls, filters):
         """
         essentially the same as query()
         """
-        return cls.query().filter(**kwargs)
+        return cls.query().filter(**filters)
 
     @classmethod
     def create(cls, filters):
         return cls.query().create(**filters)
 
     @classmethod
-    def prepareModel(cls, **kwargs):
-        return cls.model(**kwargs)
+    def prepareModel(cls, filters):
+        return cls.model(**filters)
 
     @classmethod
-    def exists(cls, **kwargs):
-        return cls.query().filter(**kwargs).exists()
+    def exists(cls, filters):
+        return cls.query().filter(**filters).exists()
 
     @classmethod
     def deleteById(cls, modelId):
@@ -53,29 +54,27 @@ class BaseRepo(object):
         cls.query().filter(id=modelId).update(**filters)
 
     @classmethod
-    def createOrUpdate(cls, **kwargs):
-        return cls.update(kwargs.get('id'), **kwargs) if cls.exists(id=kwargs.get('id', None)) else cls.create(
-            **kwargs)
+    def createOrUpdate(cls, filters):
+        return cls.update(filters.get('id'), **filters) if cls.exists(id=filters.get('id', None)) else cls.create(
+            **filters)
 
     @classmethod
     def save(cls, modelId):
-        return cls.query().get(id=modelId).save()
+        obj = cls.query().get(id=modelId)
+        obj.save()
+        return reloadObject(obj)
 
-# def _query(cls, fields=None):
-#     djangoFields = [
-#         cls._m
-#     ]
 
 # class ModelRepoMetaClass(type):
-#     def __new__(cls, name, bases, attrs, *args, **kwargs):
+#     def __new__(cls, name, bases, attrs, *args, **filters):
 #         super_new = super(ModelRepoMetaClass, cls).__new__
 #
 #         parents = [b for b in bases if isinstance(b, ModelRepoMetaClass)]
 #         if not parents:
-#             return super_new(cls, name, bases, attrs, *args, **kwargs)
+#             return super_new(cls, name, bases, attrs, *args, **filters)
 #
 #         meta = attrs.pop('Meta', None)
-#         new_class = super_new(cls, name, bases, attrs, *args, **kwargs)
+#         new_class = super_new(cls, name, bases, attrs, *args, **filters)
 #         new_class._meta = meta
 #
 #         return new_class

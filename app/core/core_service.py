@@ -35,7 +35,7 @@ class SoleHuntBaseService(object):
 
     @classmethod
     def prepare(cls, filters):
-        instance = cls.repo.prepareModel(**filters)
+        instance = cls.repo.prepareModel(filters)
         return instance
 
     @classmethod

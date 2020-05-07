@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class Post(models.Model):
     """
@@ -17,13 +16,9 @@ class Post(models.Model):
     def likes(self):
         return Like.objects.filter(post_id=self.pk, isActive=True)
 
-    @property
-    def likeCount(self):
-        return self.likes.count()
-
 
 class Like(models.Model):
-    post = models.OneToOneField('Post', related_name='+', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', related_name='+', on_delete=models.CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     isActive = models.BooleanField(default=True)
     likedBy = models.ForeignKey('subscribers.Subscriber', on_delete=models.CASCADE, null=False)
