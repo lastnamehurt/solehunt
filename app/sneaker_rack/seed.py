@@ -12,15 +12,16 @@ SNEAKER_DICT = {
 
 class SneakerSeeder(object):
 
-    def seedSneaker(self):
+    def seedSneaker(self, subscriber=None):
+        SNEAKER_DICT['subscriber'] = subscriber
         return sneakerService.create(SNEAKER_DICT)
 
 
 class SneakerRackSeeder(object):
 
     @classmethod
-    def seedSneakerRack(cls):
-        return rackService.create(filters={'subscriber': subscriberSeeder.seedSubscriber()})
+    def seedSneakerRack(cls, subscriber=None):
+        return rackService.create(filters={'subscriber': subscriber})
 
 
 sneakerSeeder = SneakerSeeder()

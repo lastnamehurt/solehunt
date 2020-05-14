@@ -8,8 +8,7 @@ from posts.usecases.posts_usecase import CreatePostUseCase
 
 class PostSeeder:
 
-    def seedPost(self, seedSubscriber=True):
-        subscriber = subscriberSeeder.seedSubscriber() if seedSubscriber else None
+    def seedPost(self, subscriber=None):
         filters = FILTERS.CREATE_POST
         if subscriber:
             filters['subscriber'] = subscriber
@@ -18,10 +17,10 @@ class PostSeeder:
 
 class LikeSeeder:
 
-    def seedLike(self):
+    def seedLike(self, post=None, likedBy=None):
         filters = LikeFilters.LIKE_POST
-        post = postSeeder.seedPost()
-        filters['post'] = post
+        filters['post_id'] = post.id
+        filters['likedBy_id'] = likedBy.id
         return UseCaseManager(LikePostUseCase, filters=filters).execute()
 
 

@@ -15,7 +15,8 @@ BLOG_DICT = {
 
 class BlogSeeder(object):
 
-    def seedBlog(self, ):
+    def seedBlog(self, subscriber=None):
+        BLOG_DICT['subscriber'] = subscriber
         blog = blogService.prepare(filters=BLOG_DICT)
         blog.save()
         return blog

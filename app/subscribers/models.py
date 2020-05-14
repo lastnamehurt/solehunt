@@ -1,5 +1,6 @@
 from django.db import models
 
+from blog.models import BlogPost
 from posts.models import Post
 from sneaker_rack.models import Sneaker
 
@@ -20,6 +21,10 @@ class Subscriber(models.Model):
         return Sneaker.objects.filter(subscriber_id=self.id)
 
     @property
+    def blogPosts(self):
+        return BlogPost.objects.filter(subscriber_id=self.id)
+
+    @property
     def posts(self):
         return Post.objects.filter(subscriber_id=self.id)
 
@@ -33,7 +38,7 @@ class Subscriber(models.Model):
         ]
 
     def __str__(self):
-        return self.alias or "N/A"
+        return "{} {}".format(self.id, self.alias)
 
 # @receiver(post_save, sender=Profile)
 # def createSubscriber(sender, instance, created, **kwargs):

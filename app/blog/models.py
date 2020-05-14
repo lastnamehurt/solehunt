@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     """
     id = models.AutoField(primary_key=True)
     post_id = models.CharField(max_length=75, null=True)
-    author = models.ForeignKey("subscribers.Subscriber", on_delete=models.CASCADE, null=True)
+    subscriber = models.ForeignKey("subscribers.Subscriber", on_delete=models.CASCADE, null=True)
     slug = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     body = models.TextField()
