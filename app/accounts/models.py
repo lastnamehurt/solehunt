@@ -13,7 +13,7 @@ class Profile(models.Model):
     bio = models.TextField()
     avatar = models.ImageField()
     isSubscribedToDigest = models.BooleanField(default=False)
-    subscriber = models.OneToOneField("subscribers.Subscriber", related_name='_subscriber', null=True,
+    subscriber = models.OneToOneField("subscribers.Subscriber", related_name="account", null=True,
                                       on_delete=models.CASCADE)
     signupConfirmation = models.BooleanField(default=False)
     isRegistered = models.BooleanField(default=False)

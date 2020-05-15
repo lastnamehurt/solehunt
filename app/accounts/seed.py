@@ -20,7 +20,7 @@ class ProfileSeeder(object):
         if user is None:
             user = cls.seedUser()
 
-        if subscriber is None:
+        if not subscriber:
             subscriber = subscriberService.createNewSubscriber(filters={'alias': username, 'isActive': True})
 
         return profileService.create(

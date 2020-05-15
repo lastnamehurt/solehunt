@@ -5,7 +5,7 @@ from subscribers.repos import subscriberRepo
 
 # TODO: churt refactor this service to inherit SoleHuntBaseService
 class SubscriberService(SoleHuntBaseService):
-    repo = subscriberRepo.model
+    repo = subscriberRepo
 
     @staticmethod
     def deleteSubscriberById(subscriberId):
