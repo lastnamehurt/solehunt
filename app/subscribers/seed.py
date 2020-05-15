@@ -27,10 +27,11 @@ class SubscriberSeeder(object):
         context['subscriber'] = subscriber
 
         # seed profile if it doesn't exist
-        if seedProfile and not subscriber.profile:
+        if seedProfile:
             from accounts.seed import profileSeeder
-            subscriber.profile = profileSeeder.seedProfile(subscriber=subscriber)
-            context['profile'] = subscriber.profile
+            profile = profileSeeder.seedProfile(subscriber=subscriber)
+            context['profile'] = profile
+
 
         # seed ghost blog that belongs to the subscriber
         if seedGhostBlog:

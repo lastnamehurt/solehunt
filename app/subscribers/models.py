@@ -12,7 +12,7 @@ class Subscriber(models.Model):
     """
     id = models.AutoField(primary_key=True)
     alias = models.CharField(max_length=100)
-    profile = models.ForeignKey("accounts.Profile", related_name='profile', null=True, on_delete=models.CASCADE)
+    profile = models.ForeignKey("accounts.Profile", related_name="subscription", null=True, on_delete=models.CASCADE)
     isActive = models.BooleanField(default=False)
     isContributor = models.BooleanField(default=False)
 
