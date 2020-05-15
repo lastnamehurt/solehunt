@@ -23,6 +23,10 @@ class GetPostUseCase(BaseUseCase):
     serviceMethod = postService.get
 
 
+class GetPostsUseCase(BaseUseCase):
+    serviceMethod = postService.getAllObjects
+
+
 class LikePostUseCase(BaseUseCase):
     serviceMethod = likeService.likePost
 
@@ -40,4 +44,8 @@ class GetSubscriberByLikesUseCase(BaseUseCase):
 
 
 class GetLikesUseCase(BaseUseCase):
-    serviceMethod = likeService.getLikes
+    serviceMethod = likeService.getAllObjects
+
+
+class GetLikeUseCase(BaseUseCase):
+    serviceMethod = likeService.get

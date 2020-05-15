@@ -16,3 +16,6 @@ class DeleteBlogUseCase(BaseUseCase):
 
 class GetBlogUseCase(BaseUseCase):
     serviceMethod = blogService.getPostById
+
+class GetBlogsUseCase(BaseUseCase):
+    serviceMethod = blogService.getAllObjects

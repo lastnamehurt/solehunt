@@ -13,6 +13,8 @@ class UpdateProfileUseCase(BaseUseCase):
 class GetProfilesUseCase(BaseUseCase):
     serviceMethod = profileService.getAllProfiles
 
+class GetProfileByIdUseCase(BaseUseCase):
+    serviceMethod = profileService.get
 
 class DeleteProfileUseCase(BaseUseCase):
     serviceMethod = profileService.deleteProfile

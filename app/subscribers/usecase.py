@@ -14,6 +14,10 @@ class GetSubscriberUseCase(BaseUseCase):
     serviceMethod = subscriberService.getSubscriberById
 
 
+class GetSubscribersUseCase(BaseUseCase):
+    serviceMethod = subscriberService.getAllObjects
+
+
 class DeleteSubscriberUseCase(BaseUseCase):
     serviceMethod = subscriberService.deleteSubscriberById
 

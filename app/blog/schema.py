@@ -1,13 +1,15 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from blog.services import blogService
-from subscribers.schema import SubscriberType
+from blog.models import BlogPost
+from blog.usecase import GetBlogUseCase
+from blog.usecase import GetBlogsUseCase
+from core import UseCaseManager as useCaseManager
 
 
 class BlogType(DjangoObjectType):
     class Meta:
-        model = blogService.repo.model
+        model = BlogPost
 
 
 class Query:
@@ -22,9 +24,8 @@ class Query:
                           )
 
     def resolve_all_blogs(self, info, **kwargs):
-        return blogService.getAllObjects()
+        return useCaseManager(GetBlogsUseCase).execute()
 
     def resolve_blog(self, info, **kwargs):
         blogId = kwargs.get('id', None)
-        if blogId is not None:
-            return blogService.get(blogId)
+        return useCaseManager(GetBlogUseCase, modelId=blogId).execute() if blogId else None

@@ -1,12 +1,15 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from subscribers.services.subscriber_service import subscriberService
+from core import UseCaseManager as useCaseManager
+from subscribers.models import Subscriber
+from subscribers.usecase import GetSubscriberUseCase
+from subscribers.usecase import GetSubscribersUseCase
 
 
 class SubscriberType(DjangoObjectType):
     class Meta:
-        model = subscriberService.repo.model
+        model = Subscriber
         fields = '__all__'
 
 
@@ -20,9 +23,9 @@ class Query(object):
                                 )
 
     def resolve_all_subscribers(self, info, **kwargs):
-        return subscriberService.getAllObjects()
+        return useCaseManager(GetSubscribersUseCase).execute()
 
     def resolve_subscriber(self, info, **kwargs):
         subscriberId = kwargs.get('id', None)
         if subscriberId is not None:
-            return subscriberService.get(subscriberId)
+            return useCaseManager(GetSubscriberUseCase, modelId=subscriberId).execute()
